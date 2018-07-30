@@ -1,22 +1,21 @@
 package com.v4social.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
 @Entity
-public class Consultation {
+public class Consultation implements Serializable {
     @Id
-    private int code;
+    @GeneratedValue
+    private Integer code;
 
     @Column
     private String name;
 
-    @Column
+    @Column(length=2000)
     private String description;
     
     @Column
@@ -24,16 +23,19 @@ public class Consultation {
     
     @Column
     private Date dateEnd;
-    
-    private int sumOfVotes;
-        
-    
+             
 	public Consultation(String name, String description, Date dateIni, Date dateEnd) {
-		super();
 		this.name = name;
 		this.description = description;
 		this.dateIni = dateIni;
 		this.dateEnd = dateEnd;
+	}
+	
+	protected Consultation() {		
+	}
+	
+	public Integer getCode() {
+		return code;
 	}
 
 	public String getName() {
@@ -67,10 +69,29 @@ public class Consultation {
 	public void setDateEnd(Date dateEnd) {
 		this.dateEnd = dateEnd;
 	}
-
-	public int getCode() {
-		return code;
+	
+	@Override
+	public String toString() {
+		return 	"Consultation{" +
+				"code: " + code + '\'' +
+				"name: " + name + '\'' +
+				"description: " + description +
+				'}';
+	}
+	
+	@Override
+	public boolean equals (Object o) {
+		if (this == o) return true;
+		if (o==null || getClass()!=o.getClass()) return false;
+		Consultation consultation = (Consultation) o;
+		return 	Objects.equals(code, consultation.code) &&
+				Objects.equals(name, consultation.name) &&
+				Objects.equals(description, consultation.description);
+	}
+	
+	@Override
+	public int hashCode() {
+		return Objects.hash(code, name, description, dateIni, dateEnd);
 	}
        
-    
 }

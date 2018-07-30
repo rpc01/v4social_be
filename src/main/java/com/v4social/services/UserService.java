@@ -24,6 +24,8 @@ public String vote(Consultation consultation, Integer numberVotes) {
 	String voteOption="to define";     
 	return voteOption;
 	    }
+
+
 }
 	
 

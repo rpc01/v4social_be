@@ -1,58 +1,45 @@
 package com.v4social.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
-
+import java.net.URL;
 
 @Entity
-public class User {
+public class User implements Serializable {
     @Id
-    private int code;
+    @GeneratedValue
+    private Integer code;
 
     @Column
-    private String firstname;
-    
-    @Column
-    private String surname;
-    
+    private String name;
+           
     @Column
     private String email;
     
     @Column
     private String phone;
-    
+        
     @Column
     private String password;
     
     protected User() {
     }
 
-	public User(String firstname, String surname, String email, String phone, String password) {
-		super();	
-		this.firstname = firstname;
-		this.surname = surname;
+	public User(Integer code, String name, String email, String phone, String password) {
+		this.code = code;
+		this.name = name;
 		this.email = email;
 		this.phone = phone;
 		this.password = password;
 	}
 
-	public String getFirstname() {
-		return firstname;
+	public String getName() {
+		return name;
 	}
 
-	public void setFirstname(String firstname) {
-		this.firstname = firstname;
-	}
-
-	public String getSurname() {
-		return surname;
-	}
-
-	public void setSurname(String surname) {
-		this.surname = surname;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getEmail() {
@@ -79,8 +66,21 @@ public class User {
 		this.password = password;
 	}
 
-	public int getUserCode() {
+	public Integer getCode() {
 		return code;
 	}
-        
+	
+	@Override
+	public boolean equals (Object o) {
+		if (this == o) return true;
+		if (o==null || getClass()!=o.getClass()) return false;
+		User user = (User) o;
+		return 	Objects.equals(code, user.code) &&
+				Objects.equals(name, user.name);
+	}
+	
+	@Override
+	public int hashCode() {
+		return Objects.hash(code, name);
+	}    
 }

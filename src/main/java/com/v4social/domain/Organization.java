@@ -6,10 +6,10 @@ import java.util.Objects;
 import java.net.URL;
 
 @Entity
-public class Organization {
+public class Organization implements Serializable {
     @Id
     @GeneratedValue
-    private Integer id;
+    private Integer code;
 
     @Column
     private String name;
@@ -25,9 +25,12 @@ public class Organization {
         
     @Column
     private String password;
+    
+    protected Organization() {
+    }
 
-	public Organization(String name, URL logo, String email, String phone, String password) {
-		super();
+	public Organization(Integer code, String name, URL logo, String email, String phone, String password) {
+		this.code = code;
 		this.name = name;
 		this.logo = logo;
 		this.email = email;
@@ -75,12 +78,24 @@ public class Organization {
 		this.password = password;
 	}
 
-	public Integer getId() {
-		return id;
+	public Integer getCode() {
+		return code;
 	}
-
- 
+	
+	@Override
+	public boolean equals (Object o) {
+		if (this == o) return true;
+		if (o==null || getClass()!=o.getClass()) return false;
+		Organization organization = (Organization) o;
+		return 	Objects.equals(code, organization.code) &&
+				Objects.equals(name, organization.name);
+	}
+	
+	@Override
+	public int hashCode() {
+		return Objects.hash(code, name);
+	}
+	
     
-
     
 }
