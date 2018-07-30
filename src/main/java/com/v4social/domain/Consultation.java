@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -23,7 +24,10 @@ public class Consultation {
     
     @Column
     private Date dateEnd;
-
+    
+    private int sumOfVotes;
+        
+    
 	public Consultation(String name, String description, Date dateIni, Date dateEnd) {
 		super();
 		this.name = name;

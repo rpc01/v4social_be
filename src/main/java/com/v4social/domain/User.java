@@ -79,7 +79,7 @@ public class User {
 		this.password = password;
 	}
 
-	public int getCode() {
+	public int getUserCode() {
 		return code;
 	}
         

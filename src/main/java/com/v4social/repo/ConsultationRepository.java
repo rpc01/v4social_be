@@ -12,13 +12,13 @@ import org.springframework.data.rest.core.annotation.RestResource;
 
 import java.util.List;
 
-public interface UserRepository extends PagingAndSortingRepository<User,Integer> {
+public interface ConsultationRepository extends PagingAndSortingRepository<Consultation,Integer> {
     
-    Page<User> findByUserCode(@Param("code") int code, Pageable pageable);
+    List<Consultation> findByConsultationCode(@Param("code") int code);
 
     //Not exposed by Spring Data REST
     @Override
     @RestResource(exported = false)
-    <U extends User> U save(U u);
+    <C extends Consultation> C save(C c);
 
 }
